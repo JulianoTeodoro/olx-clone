@@ -1,0 +1,6 @@
+export const SETAR_ERRO = 'SETAR_ERRO'
+export const SET_EMAIL = 'SET_EMAIL'
+export const SET_PASSWORD = 'SET_PASSWORD'
+export const SET_REMEMBER_PASSWORD = 'SET_REMEMBER_PASSWORD'
+export const SET_DISABLED = 'SET_DISABLED'
+export const SET_USER = 'SET_USER'

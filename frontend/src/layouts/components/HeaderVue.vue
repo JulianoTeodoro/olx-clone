@@ -17,7 +17,7 @@
                         <router-link to="/post-an-ad" class="button">Poste um anúncio</router-link>
                     </li>
                     <li>
-                        <router-link to="/logout">Sair</router-link>
+                        <router-link to="/" @click="handleLogout">Sair</router-link>
                     </li>
                 </ul>
                 <ul v-else>
@@ -38,16 +38,20 @@
 
 <script>
 
-import { isLogged } from '@/helpers/authHandler'
+import { isLogged, doLogout } from '@/helpers/authHandler'
 
 export default {
-    computed: {
-        logged(){
-            return isLogged();
+    setup(){
+
+        const logged = isLogged();
+        const handleLogout = () => {
+            doLogout();
         }
-    },
-    created(){
-        console.log(this.logged)
+
+        return {
+            logged,
+            handleLogout
+        }
     }
 }
 </script>
@@ -121,6 +125,9 @@ export default {
         font-size: 14px;
         text-decoration: none;
 
+    }
+    .sair {
+        background-color: #000
     }
 
     li a:hover{

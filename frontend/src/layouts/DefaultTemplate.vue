@@ -26,6 +26,11 @@ body{
 
 }
 
+.container{
+    max-width: 1000px;
+    margin: auto;
+}
+
 * {
     box-sizing: border-box;
 }

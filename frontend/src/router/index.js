@@ -1,11 +1,10 @@
-import VueRouter from "vue-router";
-import Vue from 'vue'
 
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home/HomeVue.vue'
 import About from '../pages/About/AboutVue.vue'
-import NotFound from '../pages/404/ErrorS404.vue'
+import NotFound from '../pages/404/NotFound.vue'
+import Login from '../pages/Login/SignIn.vue'
 
-Vue.use(VueRouter)
 
 const routes = ([
     {
@@ -13,25 +12,31 @@ const routes = ([
         component: () => import('@/layouts/DefaultTemplate.vue'),
         children: [
             {
-                path: '/',
+                path: '',
+                name: 'HomeVue',
                 component: Home
             },
             {
-                path: '/sobre',
+                path: 'sobre',
+                name: 'SobreVue',
                 component: About
             },
             {
-                path: '*',
+                path: 'signin',
+                name: 'LoginVue',
+                component: Login
+            },
+            {
+                path: '/:pathMatch(.*)',
                 component: NotFound
-            }
+            },
         ]
     },
 ])
 
-const router = new VueRouter({
-    mode: 'history',
+export default createRouter({
+    history: createWebHistory(),
     linkExactActiveClass: 'active',
     routes
 })
 
-export default router
