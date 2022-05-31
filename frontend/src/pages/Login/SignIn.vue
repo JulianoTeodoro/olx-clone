@@ -7,8 +7,7 @@
                     <div class="area--input">
                         <input type="email"
                         :disabled="disabled"
-                        v-model="email"
-                        @change="store.dispatch('setEmail', email)" >                        
+                        v-model="email">                        
                     </div>
                 </label>
                 <label class="area">
@@ -17,7 +16,6 @@
                         <input type="password"                         
                         :disabled="disabled"
                         v-model="password"
-                        @change="store.dispatch('setPassword', password)" 
                         required>                        
                     </div>
                 </label>
@@ -26,7 +24,7 @@
                     <div class="area--input">
                         <input type="checkbox"           
                         v-model="rememberPassword"
-                        @change="store.dispatch('setRememberPassword', rememberPassword)"
+                        @change="store.commit('SET_REMEMBER_PASSWORD', rememberPassword)"
                         :disabled="disabled">                        
                     </div>
                 </label>
@@ -36,44 +34,47 @@
                         <button type="submit">Entrar</button>   
                     </div>
                 </label>
-
                 <div v-if="erro" class="erro">{{erro}}</div>
 
             </form>
+
     </div>
 </template>
 
 <script>
 
-//import OlxApi from '../../helpers/OlxAPI'
-//import {doLogin} from '../../helpers/authHandler'
-import  {ref} from 'vue'
-import {useStore} from 'vuex'
-//import * as type from './_store/mutation-type'
-//import store from './_store/index';
+import {ref} from 'vue'
+import { useStore } from 'vuex';
 
 export default {
     name: 'LoginVue',
     setup(){
         const store = useStore()
         const erro = ref('');
-        const email = ref('')
-        const password = ref('')
+        const email = ref("")
+        const password = ref("")
         const rememberPassword = ref(false)
-        const disabled = ref(false)
+        const disabled = ref(store.state.users.user.disabled)
         
         const signin = async () => {
-            const auth = await store.dispatch('auth', {
+            await store.commit('SET_USER', {
+                email: email.value,
+                password: password.value,
+                disabled: disabled.value                
+            })
+
+            const auth = await store.dispatch('login', {
                 email: email.value,
                 password: password.value
             }).then(() => {
-                store.dispatch('setDisabled', !disabled.value);
-                disabled.value = !disabled.value
+                store.commit('SET_DISABLED', true);
             }).catch(error => {
                 store.dispatch('setarErro', error);
                 erro.value = error;
+                store.commit('SET_DISABLED', false);
             })
             return auth;
+        }
 
             /*store.dispatch('auth', {
                 email: email.value,
@@ -92,7 +93,6 @@ export default {
                 //doLogin(json.token, rememberPassword);
               //  this.router.push('/');
             //}
-        }
     return {
         signin, 
         erro,
@@ -100,7 +100,7 @@ export default {
         password,
         rememberPassword,
         disabled,
-        store
+        store,
     }
     },
 }

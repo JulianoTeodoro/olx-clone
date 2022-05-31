@@ -1,11 +1,28 @@
 import { createStore } from 'vuex'
 
-import user from '../resources/user/index'
+import users from './modules/users/index'
 import login from '../pages/Login/_store/index'
+import signup from '../pages/Signup/_store/index'
 
 export default createStore({
     modules: {
-        user,
-        login
+        users,
+        login,
+        signup
+    },
+    state: {
+        erro: undefined
+    },
+    mutations: {
+        setarErro: (state, {erro}) => {
+            state.erro = [erro];
+        },
+    },
+    actions: {
+
+        setarErro({commit}, payload) {
+            commit('setarErro', {payload: payload})
+        },
+            
     }
 })

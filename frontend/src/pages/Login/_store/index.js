@@ -1,16 +1,14 @@
-import mutations from './mutations';
-import actions from './actions';
 import { isLogged } from '@/helpers/authHandler';
-
+import actions from './actions';
 const state = {
-    user: {
-        email: '',
-        password: '',
-    },
-        disabled: false,
+        isLogged: isLogged(),
         rememberPassword: false,
-        erro: undefined,
-        isLogged: isLogged()  
+}
+
+const mutations = {
+    SET_REMEMBER_PASSWORD: (state, rememberPassword) => {
+        state.rememberPassword = rememberPassword
+    }
 
 }
 
@@ -18,5 +16,4 @@ export default {
     state,
     mutations,
     actions
-    
 }
