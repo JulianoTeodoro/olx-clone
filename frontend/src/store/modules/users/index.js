@@ -1,4 +1,7 @@
 import { isLogged } from '@/helpers/authHandler';
+import mutations from './mutations';
+import getters from './getters';
+import actions from './actions';
 
 const state = {
     user: {
@@ -9,23 +12,16 @@ const state = {
         state: ''
     },
     isLogged: isLogged(),
+    stateLoc: [],
+    rememberPassword: false,
 
 }
 
-const mutations = {
-    SET_USER: (state, user) => {
-        state.user = user
-    },
-
-    SET_DISABLED: (state, disabled) => {
-        state.user.disabled = disabled
-    }
-} 
-
-
-
 export default {
+    namespaced: true,
     state,
+    getters,
     mutations,
+    actions
 }
 

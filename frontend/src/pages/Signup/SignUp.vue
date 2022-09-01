@@ -15,6 +15,7 @@
                     <div class="area--title">Estado</div>
                         <div class="area--input">
                             <select v-model="selectedState">
+                                    <option :value="undefined" name="estado" disabled>Selecione o estado: </option>
                                     <option value="ac">Acre</option> 
                                     <option value="al">Alagoas</option> 
                                     <option value="am">Amazonas</option> 
@@ -102,7 +103,7 @@ export default {
         const email = ref("")
         const password = ref("")
         const confirmPassword = ref("");
-        const disabled = ref(store.state.users.user.disabled)
+        const disabled = ref(false);
         const selectedState = ref('Selecione o Estado')      
 
         const signup = async () => {
@@ -110,26 +111,28 @@ export default {
                 return;
             }
             else {
-                await store.commit('SET_USER', {
-                    email: email.value,
-                    password: password.value,
-                    name: name.value,
-                    disabled: disabled.value,
-                    state: selectedState.value                
-                })
-                const auth = await store.dispatch('register', {
+                disabled.value = true;
+                await store.dispatch('users/register', {
                     name: name.value,
                     email: email.value,
                     password: password.value,
                     stateLoc: selectedState.value
-                }).then(() => {             
-                    store.commit('SET_DISABLED', true);             
+                }).then(() => {       
+
+                    store.commit('users/SET_USER', {
+                        email: email.value,
+                        password: password.value,
+                        name: name.value,
+                        disabled: disabled.value,
+                        state: selectedState.value                
+                    })
+
                 }).catch(error => {
                     store.dispatch('setarErro', error);
                     erro.value = error;
-                    store.commit('SET_DISABLED', false);
-            })
-                return auth;
+                })
+                .finally(() => disabled.value = false)
+                
             }
         }
 

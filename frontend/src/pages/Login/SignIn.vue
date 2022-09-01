@@ -24,7 +24,7 @@
                     <div class="area--input">
                         <input type="checkbox"           
                         v-model="rememberPassword"
-                        @change="store.commit('SET_REMEMBER_PASSWORD', rememberPassword)"
+                        @change="store.commit('users/SET_REMEMBER_PASSWORD', rememberPassword)"
                         :disabled="disabled">                        
                     </div>
                 </label>
@@ -54,45 +54,28 @@ export default {
         const email = ref("")
         const password = ref("")
         const rememberPassword = ref(false)
-        const disabled = ref(store.state.users.user.disabled)
+        const disabled = ref(false)
         
-        const signin = async () => {
-            await store.commit('SET_USER', {
-                email: email.value,
-                password: password.value,
-                disabled: disabled.value                
-            })
+        const signin = () => {
+            
+            disabled.value = true;
 
-            const auth = await store.dispatch('login', {
+            store.dispatch('users/login', {
                 email: email.value,
                 password: password.value
             }).then(() => {
-                store.commit('SET_DISABLED', true);
+                store.commit('users/SET_USER', {
+                    email: email.value,
+                    password: password.value,
+                    disabled: disabled.value                
+                })
             }).catch(error => {
                 store.dispatch('setarErro', error);
                 erro.value = error;
-                store.commit('SET_DISABLED', false);
             })
-            return auth;
+            .finally(() => disabled.value = false)
         }
 
-            /*store.dispatch('auth', {
-                email: email.value,
-                password: password.value
-            })
-            .then((response) => {
-                console.log(response);
-            }).catch(error => {
-                store.dispatch('setarErro', error)
-            })*/
-            //const json = await api.login(email.value, password.value);
-
-            //if(json.error) {
-               // console.log('erro');
-            //} else {
-                //doLogin(json.token, rememberPassword);
-              //  this.router.push('/');
-            //}
     return {
         signin, 
         erro,
