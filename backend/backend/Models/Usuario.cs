@@ -16,5 +16,10 @@ namespace backend.Models
         public string? Token { get; set; }
 
         public ICollection<Ads>? Ads { get; set; }
+
+        public Usuario()
+        {
+            Ads = new List<Ads>();
+        }
     }
 }
