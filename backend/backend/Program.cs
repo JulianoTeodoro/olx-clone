@@ -1,4 +1,7 @@
+using AutoMapper;
 using backend.Data;
+using backend.DTOs.Mappings;
+using backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +17,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
+
 //Mysql
 
 var mySqlConfiguration = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -23,7 +34,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(mySqlConfiguration, ServerVersion.AutoDetect(mySqlConfiguration));
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<Usuario, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
@@ -68,6 +79,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

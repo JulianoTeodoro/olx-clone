@@ -47,3 +47,5 @@ C:\Users\juliano.teodoro\source\repos\olx-clone\backend\backend\obj\Debug\net6.0
 C:\Users\juliano.teodoro\source\repos\olx-clone\backend\backend\obj\Debug\net6.0\backend.pdb
 C:\Users\juliano.teodoro\source\repos\olx-clone\backend\backend\obj\Debug\net6.0\backend.genruntimeconfig.cache
 C:\Users\juliano.teodoro\source\repos\olx-clone\backend\backend\obj\Debug\net6.0\ref\backend.dll
+C:\Users\juliano.teodoro\source\repos\olx-clone\backend\backend\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\juliano.teodoro\source\repos\olx-clone\backend\backend\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

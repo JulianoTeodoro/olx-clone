@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "jJ38S33z71tunrWXkZF0X57+YkCmrnlYLmdbspVX7lZArSK0tYChR6k0T5UUZvko7lwncXKn7nZT3nUqpbRr0Q==",
+  "dgSpecHash": "zzHE4QUUuhu7jtndgJEyCyItRcN/cIW6xbEnyE3r+ErtwAl03fa8Y3DYyOZerK+hDXuG5rKC6MWf5CZfGpIQgQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\juliano.teodoro\\source\\repos\\olx-clone\\backend\\backend\\backend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\juliano.teodoro\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\juliano.teodoro\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.9\\microsoft.aspnetcore.authentication.jwtbearer.6.0.9.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
@@ -13,7 +15,7 @@
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.9\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.9.nupkg.sha512",
-    "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.9\\microsoft.entityframeworkcore.6.0.9.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.9\\microsoft.entityframeworkcore.abstractions.6.0.9.nupkg.sha512",
     "C:\\Users\\juliano.teodoro\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.9\\microsoft.entityframeworkcore.analyzers.6.0.9.nupkg.sha512",

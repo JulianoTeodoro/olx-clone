@@ -38,6 +38,12 @@ namespace backend.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Discriminator = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Nome = table.Column<string>(type: "varchar(80)", maxLength: 80, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SobreNome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -95,27 +101,6 @@ namespace backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_states", x => x.StatesId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "usuario",
-                columns: table => new
-                {
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PasswordHash = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Token = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_usuario", x => x.UsuarioId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -263,22 +248,23 @@ namespace backend.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     views = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UsuarioId1 = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ads", x => x.AdsId);
                     table.ForeignKey(
+                        name: "FK_ads_AspNetUsers_UsuarioId1",
+                        column: x => x.UsuarioId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_ads_categorias_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "categorias",
                         principalColumn: "CategoriaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ads_usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "usuario",
-                        principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -311,9 +297,9 @@ namespace backend.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ads_UsuarioId",
+                name: "IX_ads_UsuarioId1",
                 table: "ads",
-                column: "UsuarioId");
+                column: "UsuarioId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -385,16 +371,13 @@ namespace backend.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "ads");
 
             migrationBuilder.DropTable(
-                name: "categorias");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "usuario");
+                name: "categorias");
         }
     }
 }

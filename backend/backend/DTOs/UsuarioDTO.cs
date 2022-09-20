@@ -5,14 +5,12 @@ namespace backend.DTOs
 {
     public class UsuarioDTO
     {
-        [Required(ErrorMessage = "O nome é obrigatorio")]
-        public string? Name { get; set; }
-        [Required(ErrorMessage = "O email é obrigatorio")]
+        public string? UserName { get; set; }
+        public string? Sobrenome { get; set; }
+
         [EmailAddress]
         public string? Email { get; set; }
-
-        public string Token { get; set; }
-        public DateTime Expiration { get; set; }
+        public string? Password { get; set; }
 
         public ICollection<Ads>? Ads { get; set; }
     }

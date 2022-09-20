@@ -11,7 +11,7 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220919140425_InicializandoBanco")]
+    [Migration("20220920131532_InicializandoBanco")]
     partial class InicializandoBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace backend.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UsuarioId1")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<DateTime>("dateCreated")
                         .HasColumnType("datetime(6)");
 
@@ -61,7 +64,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CategoriaId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("ads");
                 });
@@ -115,31 +118,6 @@ namespace backend.Migrations
                     b.HasKey("StatesId");
 
                     b.ToTable("states");
-                });
-
-            modelBuilder.Entity("backend.Models.Usuario", b =>
-                {
-                    b.Property<int>("UsuarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("UsuarioId");
-
-                    b.ToTable("usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -203,6 +181,10 @@ namespace backend.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -253,6 +235,8 @@ namespace backend.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -334,6 +318,22 @@ namespace backend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("backend.Models.Usuario", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("SobreNome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasDiscriminator().HasValue("Usuario");
+                });
+
             modelBuilder.Entity("backend.Models.Ads", b =>
                 {
                     b.HasOne("backend.Models.Categoria", null)
@@ -344,9 +344,7 @@ namespace backend.Migrations
 
                     b.HasOne("backend.Models.Usuario", null)
                         .WithMany("Ads")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId1");
                 });
 
             modelBuilder.Entity("backend.Models.Images", b =>
