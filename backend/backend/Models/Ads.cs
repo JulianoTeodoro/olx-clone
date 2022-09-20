@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend.Models
 {
@@ -12,7 +13,9 @@ namespace backend.Models
         [Required(ErrorMessage = "O titulo de produto é necessário!")]
         [StringLength(80, MinimumLength = 4)]
         public string? Title { get; set; }
-        public int UsuarioId { get; set; }
+
+        public string UsuarioId { get; set; }
+
         public DateTime dateCreated { get; set; }
 
         [ForeignKey("categoria_id")]

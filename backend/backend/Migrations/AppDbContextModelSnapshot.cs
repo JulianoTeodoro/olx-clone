@@ -46,10 +46,8 @@ namespace backend.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("varchar(80)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioId1")
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("dateCreated")
@@ -62,7 +60,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CategoriaId");
 
-                    b.HasIndex("UsuarioId1");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("ads");
                 });
@@ -342,7 +340,9 @@ namespace backend.Migrations
 
                     b.HasOne("backend.Models.Usuario", null)
                         .WithMany("Ads")
-                        .HasForeignKey("UsuarioId1");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("backend.Models.Images", b =>

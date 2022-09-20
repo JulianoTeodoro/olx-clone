@@ -239,7 +239,8 @@ namespace backend.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(type: "varchar(80)", maxLength: 80, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     dateCreated = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
@@ -248,18 +249,17 @@ namespace backend.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     views = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UsuarioId1 = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ads", x => x.AdsId);
                     table.ForeignKey(
-                        name: "FK_ads_AspNetUsers_UsuarioId1",
-                        column: x => x.UsuarioId1,
+                        name: "FK_ads_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ads_categorias_CategoriaId",
                         column: x => x.CategoriaId,
@@ -297,9 +297,9 @@ namespace backend.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ads_UsuarioId1",
+                name: "IX_ads_UsuarioId",
                 table: "ads",
-                column: "UsuarioId1");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
