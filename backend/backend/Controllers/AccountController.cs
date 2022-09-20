@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using backend.Services;
 using AutoMapper;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
@@ -27,6 +28,7 @@ namespace backend.Controllers
             _config = config;
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet]
         public ActionResult<string> Get()
         {
