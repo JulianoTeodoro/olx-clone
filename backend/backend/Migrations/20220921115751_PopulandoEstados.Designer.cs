@@ -11,8 +11,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220920140428_InicializandoBanco")]
-    partial class InicializandoBanco
+    [Migration("20220921115751_PopulandoEstados")]
+    partial class PopulandoEstados
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,11 @@ namespace backend.Migrations
                     b.Property<bool>("PriceNegotiable")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("StatesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
@@ -49,7 +53,6 @@ namespace backend.Migrations
                         .HasColumnType("varchar(80)");
 
                     b.Property<string>("UsuarioId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("dateCreated")
@@ -342,9 +345,7 @@ namespace backend.Migrations
 
                     b.HasOne("backend.Models.Usuario", null)
                         .WithMany("Ads")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("backend.Models.Images", b =>

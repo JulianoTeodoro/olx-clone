@@ -14,7 +14,7 @@ namespace backend.Models
         [StringLength(80, MinimumLength = 4)]
         public string? Title { get; set; }
 
-        public string UsuarioId { get; set; }
+        public string? UsuarioId { get; set; }
 
         public DateTime dateCreated { get; set; }
 
@@ -31,11 +31,17 @@ namespace backend.Models
 
         [Required(ErrorMessage = "É obrigatorio a descrição")]
         public string? Descricao { get; set; }
+        
         public int views { get; set; }
+
+        [Required]
         public string? Status { get; set; }
         public ICollection<Images>? images { get; set; }
 
-        public Ads ()
+        [Required]
+        public int StatesId { get; set; }
+
+        public Ads()
         {
             images = new List<Images>();
         }

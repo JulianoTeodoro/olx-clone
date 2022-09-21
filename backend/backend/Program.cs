@@ -2,6 +2,7 @@ using AutoMapper;
 using backend.Data;
 using backend.DTOs.Mappings;
 using backend.Models;
+using backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -64,6 +65,8 @@ builder.Services.AddAuthentication(
         builder =>
         builder.WithOrigins("https://www.apirequest.io/").WithMethods("GET"));
 });*/
+
+builder.Services.AddScoped<UserService>();
 
 //
 
