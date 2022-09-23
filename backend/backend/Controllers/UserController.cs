@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using backend.Models;
+using backend.DTOs;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace backend.Controllers
 {
@@ -11,10 +14,14 @@ namespace backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly AuthenticatedUser _user;
+
+
         private UserService _userService { get; set; }
-        public UserController(UserService userService)
+        public UserController(UserService userService, AuthenticatedUser user)
         {
             _userService = userService;
+            _user = user;
         }
 
         [HttpGet("states")]
@@ -22,6 +29,14 @@ namespace backend.Controllers
         {
             var states = _userService.getStates();
             return Ok(new { states = states });
+        }
+
+        [HttpPost("me")]
+        public IEnumerable<Claim> GetInfo([FromBody] TokenDTO token)
+        {
+            var user = _user.GetClaimsIdentity();
+
+            return user;
         }
     }
 }
