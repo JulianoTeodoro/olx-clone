@@ -9,7 +9,6 @@ namespace backend.DTOs.Mappings
         public MappingProfile()
         {
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
-            CreateMap<UsuarioToken, TokenDTO>().ReverseMap();
         }
     }
 }

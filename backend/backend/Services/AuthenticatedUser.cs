@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using backend.Models;
+using System.Security.Claims;
 
 namespace backend.Services
 {
@@ -13,6 +14,7 @@ namespace backend.Services
 
 		public string Email => _accessor.HttpContext.User.Identity.Name;
 		public string Name => GetClaimsIdentity().FirstOrDefault(a => a.Type == ClaimTypes.Name)?.Value;
+
 
 		public IEnumerable<Claim> GetClaimsIdentity()
 		{

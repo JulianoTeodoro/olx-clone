@@ -6,6 +6,8 @@ using backend.Models;
 using backend.DTOs;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using backend.Data;
+using AutoMapper;
 
 namespace backend.Controllers
 {
@@ -15,13 +17,14 @@ namespace backend.Controllers
     public class UserController : ControllerBase
     {
         private readonly AuthenticatedUser _user;
+        private readonly IMapper? _mapper;
+        private readonly UserService _userService;
 
-
-        private UserService _userService { get; set; }
-        public UserController(UserService userService, AuthenticatedUser user)
+        public UserController(AuthenticatedUser user, UserService userService, IMapper mapper)
         {
-            _userService = userService;
             _user = user;
+            _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet("states")]
@@ -32,9 +35,9 @@ namespace backend.Controllers
         }
 
         [HttpPost("me")]
-        public IEnumerable<Claim> GetInfo([FromBody] TokenDTO token)
+        public UsuarioDTO GetInfo([FromBody] IDDTO id)
         {
-            var user = _user.GetClaimsIdentity();
+            var user = _userService.infoId(id.ID);
 
             return user;
         }

@@ -6,6 +6,8 @@ namespace backend.DTOs
     public class UsuarioDTO
     {
         public string? UserName { get; set; }
+        public string? Nome { get; set; }
+
         public string? Sobrenome { get; set; }
 
         [EmailAddress]

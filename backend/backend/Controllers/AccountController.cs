@@ -6,6 +6,7 @@ using backend.Services;
 using AutoMapper;
 using backend.Models;
 using Microsoft.AspNetCore.Authorization;
+using backend.Data;
 
 namespace backend.Controllers
 {
@@ -18,14 +19,16 @@ namespace backend.Controllers
         private readonly SignInManager<Usuario> _signInManager;
         private readonly IMapper? _mapper;
         private readonly IConfiguration _config;
+        private readonly UserService _userService;
 
         public AccountController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, 
-            IMapper mapper, IConfiguration config)
+            IMapper mapper, IConfiguration config, UserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _config = config;
+            _userService = userService;
         }
 
         [Authorize(AuthenticationSchemes = "Bearer")]
@@ -88,7 +91,8 @@ namespace backend.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(tokenService.GeraToken(usuarioDTO));
+                var UsuarioDTO = _userService.info(login.Email);
+                return Ok(new { token = tokenService.GeraToken(usuarioDTO), usuario = UsuarioDTO });
             }
             else
             {

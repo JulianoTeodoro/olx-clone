@@ -71,6 +71,7 @@ builder.Services.AddAuthentication(
 });*/
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<AuthenticatedUser>();
 
 //
