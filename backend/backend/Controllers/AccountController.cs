@@ -102,5 +102,25 @@ namespace backend.Controllers
 
         }
 
+        [HttpPost("changepassword")]
+        public async Task<ActionResult> ChangePassword([FromBody] LoginModel user)
+        {
+            var usuarioDto = _userService.info(user.Email);
+            var usuario = await _userManager.FindByIdAsync(usuarioDto.Id);
+
+            var result = await _userManager.ChangePasswordAsync(usuario, user.Password, user.NewPassword);
+
+            if (result.Succeeded)
+            {
+                if(usuario != null)
+                {
+                    await _signInManager.SignInAsync(usuario, isPersistent: false);
+                }
+                return Ok("Senha alterada");
+            }
+
+            return BadRequest("Erro");
+        }
+
     }
 }
