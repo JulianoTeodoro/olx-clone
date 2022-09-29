@@ -18,6 +18,7 @@ namespace backend.Models
 
         public DateTime dateCreated { get; set; }
 
+        [Required]
         [ForeignKey("categoria_id")]
         public int CategoriaId { get; set; }
 
