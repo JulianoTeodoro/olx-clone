@@ -31,7 +31,7 @@ namespace backend.Models
 
         [Required(ErrorMessage = "É obrigatorio a descrição")]
         public string? Descricao { get; set; }
-        
+
         public int views { get; set; }
 
         [Required]

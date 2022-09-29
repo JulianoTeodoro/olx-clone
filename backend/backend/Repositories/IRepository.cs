@@ -4,6 +4,7 @@ namespace backend.Repositories
 {
     public interface IRepository<T>
     {
+
         IQueryable<T> GetAsync();
         Task<T> GetById(Expression<Func<T, bool>> predicates);
         void Add(T entity);

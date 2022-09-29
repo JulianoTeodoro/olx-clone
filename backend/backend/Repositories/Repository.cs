@@ -8,6 +8,11 @@ namespace backend.Repositories
     {
         protected AppDbContext _context;
 
+        public Repository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public async void Add(T entity)
         {
             await _context.Set<T>().AddAsync(entity);

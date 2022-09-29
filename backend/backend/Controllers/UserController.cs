@@ -16,13 +16,11 @@ namespace backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly AuthenticatedUser _user;
         private readonly IMapper? _mapper;
         private readonly UserService _userService;
 
-        public UserController(AuthenticatedUser user, UserService userService, IMapper mapper)
+        public UserController(UserService userService, IMapper mapper)
         {
-            _user = user;
             _userService = userService;
             _mapper = mapper;
         }

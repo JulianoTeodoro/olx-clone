@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qxWfSEI+y6F27g3+AAcfyMm2zEPI8zbORbYs4CS01+kX1hNq+x92Jn/06oM2gNl26QFwC13HH/GdDXhjt6IEMw==",
+  "dgSpecHash": "2tmr3Nii3+uIZwR3WbDN/9v6+bk0Ia2jrzC+Zb5vx5OdNbxZY8inxaqj9EFuWvkvg6TFEQMkk2DlL/cSdyl1OQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Juliano\\Source\\Repos\\olx-clone\\backend\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\Juliano\\source\\repos\\olx-clone\\backend\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Juliano\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Juliano\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

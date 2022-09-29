@@ -2292,11 +2292,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Juliano\\Source\\Repos\\olx-clone\\backend\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\Juliano\\source\\repos\\olx-clone\\backend\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\Juliano\\Source\\Repos\\olx-clone\\backend\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\Juliano\\source\\repos\\olx-clone\\backend\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\Juliano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Juliano\\Source\\Repos\\olx-clone\\backend\\backend\\obj\\",
+      "outputPath": "C:\\Users\\Juliano\\source\\repos\\olx-clone\\backend\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Juliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
