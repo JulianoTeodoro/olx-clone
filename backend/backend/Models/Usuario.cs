@@ -14,7 +14,7 @@ namespace backend.Models
         public string? SobreNome { get; set; }
 
         public ICollection<Ads>? Ads { get; set; }
-
+        
         public Usuario()
         {
             Ads = new List<Ads>();

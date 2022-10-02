@@ -39,13 +39,9 @@ namespace backend.Controllers
             }
             try
             {
-                if(System.Text.Encoding.UTF8.GetByteCount(categoria.Slug) < 1000000)
-                {
-                    _uof.CategoriaRepository.Add(categoria);
-                    await _uof.Commit();
-                    return new CreatedAtRouteResult("ObterCategoria", new { categoria = categoria.CategoriaId }, categoria);
-                }
-                return BadRequest("Failed");
+               _uof.CategoriaRepository.Add(categoria);
+               await _uof.Commit();
+               return new CreatedAtRouteResult("ObterCategoria", new { categoria = categoria.CategoriaId }, categoria);
             }
             catch (DbUpdateException)
             {

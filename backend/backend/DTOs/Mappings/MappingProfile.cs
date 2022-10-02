@@ -9,6 +9,8 @@ namespace backend.DTOs.Mappings
         public MappingProfile()
         {
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
+            CreateMap<Ads, AdsDTO>().ReverseMap();
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using backend.Validations;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace backend.Models
@@ -7,6 +8,8 @@ namespace backend.Models
     {
         public int CategoriaId { get; set; }
         public string? Nome { get; set; }
+
+        [ValidationImage]
         public string? Slug { get; set; }
 
         //[JsonIgnore(Condition = JsonIgnoreCondition.Always)]

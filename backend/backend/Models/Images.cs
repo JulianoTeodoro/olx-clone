@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using backend.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
@@ -7,9 +8,12 @@ namespace backend.Models
     {
         [Key]
         public int ImagesId { get; set; }
+
         [Required]
+        [ValidationImage]
         public string? ImageUrl { get; set; }
 
+        [Required]
         [ForeignKey("ads_id")]
         public int AdsId { get; set; }
 
