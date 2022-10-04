@@ -15,4 +15,5 @@ export const doLogin = (token, rememberPassword) => {
 
 export const doLogout = () => {
     Cookies.remove('token');
+    localStorage.removeItem("usuario");
 }

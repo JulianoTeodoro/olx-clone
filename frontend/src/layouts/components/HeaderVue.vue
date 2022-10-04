@@ -46,6 +46,7 @@ export default {
         const logged = isLogged();
         const handleLogout = () => {
             doLogout();
+            
         }
 
         return {

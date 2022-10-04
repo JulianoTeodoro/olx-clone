@@ -1,7 +1,7 @@
 //import qs from 'qs'
 import Cookies from 'js-cookie'
 import router from '@/router/index'
-const BASEAPI = 'http://alunos.b7web.com.br:501'
+const BASEAPI = 'https://localhost:7032'
 
 const apiFetchPost = async (endpoint, body) => {
     if(!body.token) {
@@ -11,7 +11,8 @@ const apiFetchPost = async (endpoint, body) => {
         }
     }
 
-    console.log(JSON.stringify(body))
+    //console.log(JSON.stringify(body))
+    console.log(body);
 
     const res = await fetch(BASEAPI+endpoint, {
         method:'POST',
@@ -34,7 +35,7 @@ const apiFetchPost = async (endpoint, body) => {
 }
 
 
-/*const apiFetchGet = async (endpoint, body = []) => {
+const apiFetchGet = async (endpoint, body = []) => {
     if(!body.token){
         let token = Cookies.get('token')
         if(token){
@@ -42,7 +43,13 @@ const apiFetchPost = async (endpoint, body) => {
         }
     }
 
-    const res = await fetch(`${BASEAPI+endpoint}${qs.stringify(body)}`)
+    const res = await fetch(`${BASEAPI+endpoint}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${body.token}`
+        }
+    })
     const json = await res.json();
 
     if(json.notallowed){
@@ -50,7 +57,7 @@ const apiFetchPost = async (endpoint, body) => {
     } 
 
     return json;
-}**/
+}
 
 
 const OlxAPI = {
@@ -58,18 +65,32 @@ const OlxAPI = {
         //fazer consulta ao webservice
         
         const json = await apiFetchPost(
-            '/user/signin', 
+            '/Account/login', 
             {email, password}
         );
         return json;
     },
 
-    register: async (name, email, password, stateLoc) => {
+    register: async (Nome, Sobrenome, Email, Password, ConfirmPassword) => {
         const json = await apiFetchPost(
-            '/user/signup',
-            {name, email, password, state: stateLoc}
+            '/Account/register',
+            {Nome, Sobrenome, Email, Password, ConfirmPassword}
         );
         return json;
+    },
+
+    categories: async () => {
+        const json = await apiFetchGet("/api/Categorias")
+        return json;
+    },
+    states: async () => {
+        const json = await apiFetchGet("/api/User/states")
+        return json;
+    },
+    ads: async () => {
+        const json = await apiFetchGet("/api/Ads")
+        return json;
+
     }
 
 }

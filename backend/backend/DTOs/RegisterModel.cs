@@ -19,9 +19,6 @@ namespace backend.DTOs
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
-        public int StatesId { get; set; }
-
-
         [Display(Name = "Confirma senha")]
         [Compare("Password", ErrorMessage = "Senhas não conferem")]
         [DataType(DataType.Password)]

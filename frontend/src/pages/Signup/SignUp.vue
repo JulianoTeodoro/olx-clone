@@ -10,43 +10,16 @@
                         v-model="name" 
                         required>                        
                     </div>
-                </label>
+                </label> 
                 <label class="area">
-                    <div class="area--title">Estado</div>
-                        <div class="area--input">
-                            <select v-model="selectedState">
-                                    <option :value="undefined" name="estado" disabled>Selecione o estado: </option>
-                                    <option value="ac">Acre</option> 
-                                    <option value="al">Alagoas</option> 
-                                    <option value="am">Amazonas</option> 
-                                    <option value="ap">Amapá</option> 
-                                    <option value="ba">Bahia</option> 
-                                    <option value="ce">Ceará</option> 
-                                    <option value="df">Distrito Federal</option> 
-                                    <option value="es">Espírito Santo</option> 
-                                    <option value="go">Goiás</option> 
-                                    <option value="ma">Maranhão</option> 
-                                    <option value="mt">Mato Grosso</option> 
-                                    <option value="ms">Mato Grosso do Sul</option> 
-                                    <option value="mg">Minas Gerais</option> 
-                                    <option value="pa">Pará</option> 
-                                    <option value="pb">Paraíba</option> 
-                                    <option value="pr">Paraná</option> 
-                                    <option value="pe">Pernambuco</option> 
-                                    <option value="pi">Piauí</option> 
-                                    <option value="rj">Rio de Janeiro</option> 
-                                    <option value="rn">Rio Grande do Norte</option> 
-                                    <option value="ro">Rondônia</option> 
-                                    <option value="rs">Rio Grande do Sul</option> 
-                                    <option value="rr">Roraima</option> 
-                                    <option value="sc">Santa Catarina</option> 
-                                    <option value="se">Sergipe</option> 
-                                    <option value="sp">São Paulo</option> 
-                                    <option value="to">Tocantins</option> 
-
-                            </select>
+                    <div class="area--title">Sobrenome</div>
+                    <div class="area--input">
+                        <input type="text"
+                        :disabled="disabled"
+                        v-model="sobrenome" 
+                        required>                        
                     </div>
-                </label>            
+                </label> 
                 <label class="area">
                     <div class="area--title">Email</div>
                     <div class="area--input">
@@ -104,7 +77,7 @@ export default {
         const password = ref("")
         const confirmPassword = ref("");
         const disabled = ref(false);
-        const selectedState = ref('Selecione o Estado')      
+        const sobrenome = ref('')      
 
         const signup = async () => {
             if(password.value !== confirmPassword.value) {
@@ -113,18 +86,17 @@ export default {
             else {
                 disabled.value = true;
                 await store.dispatch('users/register', {
-                    name: name.value,
-                    email: email.value,
-                    password: password.value,
-                    stateLoc: selectedState.value
+                    Nome: name.value,
+                    Sobrenome: sobrenome.value,
+                    Email: email.value,
+                    Password: password.value,
                 }).then(() => {       
 
                     store.commit('users/SET_USER', {
                         email: email.value,
                         password: password.value,
                         name: name.value,
-                        disabled: disabled.value,
-                        state: selectedState.value                
+                        sobrenome: sobrenome.value                
                     })
 
                 }).catch(error => {
@@ -161,8 +133,8 @@ export default {
         confirmPassword,
         disabled,
         store,
-        selectedState,
-        signup
+        signup,
+        sobrenome
     }
     },
 }

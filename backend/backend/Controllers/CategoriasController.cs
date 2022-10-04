@@ -12,7 +12,6 @@ namespace backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CategoriasController : Controller
     {
         private readonly IUnitOfWork _uof;
@@ -31,6 +30,7 @@ namespace backend.Controllers
         }
 
         [HttpPost("criarCategoria")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<ActionResult<Categoria>> Post(Categoria categoria)
         {
             if (!ModelState.IsValid)

@@ -84,7 +84,6 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id:int:min(1):maxlength(5)}")]
-
         public async Task<ActionResult<AdsDTO>> GetAdsById(int id)
         {
             try

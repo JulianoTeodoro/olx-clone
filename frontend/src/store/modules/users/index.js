@@ -4,16 +4,11 @@ import getters from './getters';
 import actions from './actions';
 
 const state = {
-    user: {
-        email: '',
-        password: '',
-        name: "",
-        disabled: false,
-        state: ''
-    },
+    user: undefined,
     isLogged: isLogged(),
-    stateLoc: [],
+    stateLoc: undefined,
     rememberPassword: false,
+    categorias: undefined
 
 }
 

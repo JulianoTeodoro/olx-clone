@@ -67,12 +67,18 @@ builder.Services.AddAuthentication(
         };
     });
 
-/*builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
+    options.AddPolicy("CorsPolicy", builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+}
+/*{
     options.AddPolicy("PermitirApiRequest",
         builder =>
         builder.WithOrigins("https://www.apirequest.io/").WithMethods("GET"));
-});*/
+}*/);
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -91,6 +97,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 app.UseAuthentication();

@@ -66,8 +66,7 @@ export default {
             }).then(() => {
                 store.commit('users/SET_USER', {
                     email: email.value,
-                    password: password.value,
-                    disabled: disabled.value                
+                    password: password.value,          
                 })
             }).catch(error => {
                 store.dispatch('setarErro', error);

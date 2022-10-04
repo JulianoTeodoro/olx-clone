@@ -13,7 +13,18 @@ export default {
     components: {
         HeaderVue,
         FooterVue
-    }
+    },
+    created() {
+        this.$store.dispatch("users/categorias");
+        this.$store.dispatch("users/states")
+        this.$store.dispatch("ads/getADS");
+        if (this.$store.state.users.user == undefined) {
+            var usuario = JSON.parse(localStorage.getItem("usuario"));
+            if(usuario !== null) {
+                this.$store.dispatch("users/login", usuario);
+            }
+        }
+    },
 }
 </script>
 
