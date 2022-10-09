@@ -8,9 +8,9 @@ namespace backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("INSERT INTO states(Nome) VALUES('MG')");
-            migrationBuilder.Sql("INSERT INTO states(Nome) VALUES('RJ')");
-            migrationBuilder.Sql("INSERT INTO states(Nome) VALUES('SP')");
+            migrationBuilder.Sql("INSERT INTO states(StatesId, Nome) VALUES(0, 'MG')");
+            migrationBuilder.Sql("INSERT INTO states(StatesId, Nome) VALUES(1, 'RJ')");
+            migrationBuilder.Sql("INSERT INTO states(StatesId, Nome) VALUES(2, 'SP')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -11,10 +11,10 @@ namespace backend.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "SobreNome",
                 table: "AspNetUsers",
-                type: "longtext",
+                type: "varchar(255)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "longtext")
+                oldType: "varchar(255)")
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
@@ -33,7 +33,7 @@ namespace backend.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "Discriminator",
                 table: "AspNetUsers",
-                type: "longtext",
+                type: "varchar(255)",
                 nullable: false)
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -64,10 +64,10 @@ namespace backend.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "SobreNome",
                 table: "AspNetUsers",
-                type: "longtext",
+                type: "varchar(255)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "longtext",
+                oldType: "varchar(255)",
                 oldNullable: true)
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");

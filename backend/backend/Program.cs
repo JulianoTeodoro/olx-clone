@@ -34,13 +34,20 @@ IMapper mapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 
-//Mysql
+//Mysql - Sql Server
 
-var mySqlConfiguration = builder.Configuration.GetConnectionString("DefaultConnection");
+//var mySqlConfiguration = builder.Configuration.GetConnectionString("DefaultConnection");
+
+var sqlServerConfiguration = builder.Configuration.GetConnectionString("DefaultConnection");
+
+/*builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseMySql(mySqlConfiguration, ServerVersion.AutoDetect(mySqlConfiguration));
+});*/
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseMySql(mySqlConfiguration, ServerVersion.AutoDetect(mySqlConfiguration));
+    options.UseSqlServer(sqlServerConfiguration);
 });
 
 builder.Services.AddIdentity<Usuario, IdentityRole>()
