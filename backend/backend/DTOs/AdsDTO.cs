@@ -30,7 +30,8 @@ namespace backend.DTOs
 
         [Required]
         public string? Status { get; set; }
-        public ICollection<Images>? images { get; set; }
+
+        public byte[] Photo { get; set; }
 
         [Required]
         public int StatesId { get; set; }

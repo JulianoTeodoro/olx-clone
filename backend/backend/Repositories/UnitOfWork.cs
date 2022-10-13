@@ -1,4 +1,5 @@
 ﻿using backend.Data;
+using backend.Services;
 
 namespace backend.Repositories
 {
@@ -6,7 +7,6 @@ namespace backend.Repositories
     {
         private CategoriaRepository? _categoriaRepository;
         private AdsRepository? _adsRepository;
-        private ImageRepository? _imageRepository; 
 
         public AppDbContext _context;
 
@@ -23,14 +23,6 @@ namespace backend.Repositories
             get
             {
                 return _adsRepository = _adsRepository ?? new AdsRepository(_context);
-            }
-        }
-
-        public IimageRepository ImageRepository
-        {
-            get
-            {
-                return _imageRepository = _imageRepository ?? new ImageRepository(_context);
             }
         }
 

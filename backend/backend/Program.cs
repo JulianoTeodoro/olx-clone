@@ -88,9 +88,9 @@ builder.Services.AddCors(options =>
 }*/);
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ImageService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 
 //
 

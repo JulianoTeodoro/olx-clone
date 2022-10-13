@@ -8,6 +8,7 @@ namespace backend.Models
     public class Ads
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int AdsId { get; set; }
 
         [Required(ErrorMessage = "O titulo de produto é necessário!")]
@@ -37,14 +38,17 @@ namespace backend.Models
 
         [Required]
         public string? Status { get; set; }
-        public ICollection<Images>? images { get; set; }
+
+        //public ICollection<Images>? images { get; set; }
+
+        public byte[]? Photo { get; set; }
 
         [Required]
         public int StatesId { get; set; }
 
-        public Ads()
+        /*public Ads()
         {
             images = new List<Images>();
-        }
+        }*/
     }
 }

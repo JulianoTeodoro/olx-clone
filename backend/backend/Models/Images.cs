@@ -7,11 +7,10 @@ namespace backend.Models
     public class Images
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int ImagesId { get; set; }
 
-        [Required]
-        [ValidationImage]
-        public string? ImageUrl { get; set; }
+        public string? Diretorio { get; set; }
 
         [Required]
         [ForeignKey("ads_id")]

@@ -12,12 +12,13 @@ namespace backend.Repositories
 
         public async Task<IEnumerable<Ads>> GetByTitle(string title)
         {
-            return await GetAsync().Where(p => p.Title == title).Include(p => p.images).ToListAsync(); 
+            return await GetAsync().Where(p => p.Title == title)/*.Include(p => p.images)*/.ToListAsync(); 
         }
 
-        public async Task<Ads> GetAdsById(int id)
+        public Ads GetAdsById(int id)
         {
-            return await GetAsync().Include(p => p.images).SingleOrDefaultAsync(p => p.AdsId == id);
+            return GetAsync().SingleOrDefault(p => p.AdsId == id);
         }
+
     }
 }

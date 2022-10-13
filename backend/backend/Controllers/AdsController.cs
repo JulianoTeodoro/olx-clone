@@ -2,10 +2,12 @@
 using backend.DTOs;
 using backend.Models;
 using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace backend.Controllers
 {
@@ -16,11 +18,13 @@ namespace backend.Controllers
 
         private readonly IUnitOfWork _uof;
         private readonly IMapper _mapper;
+        private readonly ImageService _imageService;
 
-        public AdsController(IUnitOfWork uof, IMapper mapper)
+        public AdsController(IUnitOfWork uof, IMapper mapper, ImageService imageService)
         {
             _uof = uof;
             _mapper = mapper;
+            _imageService = imageService;
         }
 
         [HttpPost]
@@ -42,7 +46,7 @@ namespace backend.Controllers
             }
         }
 
-        [HttpPost("adicionarImagem")]
+        /*[HttpPost("adicionarImagem")]
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<ActionResult<ICollection<Images>>> AdicionarImagem(ICollection<Images> images)
         {
@@ -64,6 +68,38 @@ namespace backend.Controllers
                 _uof.Dispose();
                 return BadRequest("Erro");
             }
+        }*/
+
+        [HttpPost("adicionarImagem/{adsId}")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<ActionResult> AdicionarImage(IFormFile fileObj, int AdsId)
+        {
+
+            try
+            {
+                var anuncio = _uof.AdsRepository.GetAdsById(AdsId);
+
+                if(anuncio is null)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { message = "Erro de criação" });
+                }
+
+                var image = _imageService.AdicionarImage(fileObj);
+
+                anuncio.Photo = image;
+
+                _uof.AdsRepository.UpdateAsync(anuncio);
+                await _uof.Commit();
+
+                return StatusCode(StatusCodes.Status200OK, new { message = "Imagem salva" });
+
+
+            }
+            catch (DbUpdateException)
+            {
+                return BadRequest("Erro na criação");
+            }
+
         }
 
         [HttpGet(Name = "ObterAds")]
@@ -88,7 +124,7 @@ namespace backend.Controllers
         {
             try
             {
-                var ads = await _uof.AdsRepository.GetAdsById(id);
+                var ads = _uof.AdsRepository.GetAdsById(id);
 
                 if (ads is null)
                 {
@@ -144,15 +180,15 @@ namespace backend.Controllers
         {
             try
             {
-                var ads = _uof.AdsRepository.GetAsync().Include(p => p.images).SingleOrDefault(p => p.AdsId == id);
+                var ads = _uof.AdsRepository.GetAsync().SingleOrDefault(p => p.AdsId == id);/*Include(p => p.images).*/
 
-                if (!(ads.images is null))
+                /*if (!(ads.images is null))
                 {
                     foreach(Images image in ads.images)
                     {
                         _uof.ImageRepository.DeleteAsync(image);
                     }
-                }
+                } DELETE ANTERIOR DE IMAGENS */
 
                 _uof.AdsRepository.DeleteAsync(ads);
                 _uof.Commit();
